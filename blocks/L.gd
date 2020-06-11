@@ -20,7 +20,7 @@ func _init():
 	matrix[0][1] = true # |
 	matrix[0][0] = true # |_
 	matrix[1][0] = true
-	matrix[1][1] = true
+
 
 func graph(tilemap: TileMap, tile: int):
 	for toX in range(4):
