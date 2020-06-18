@@ -3,12 +3,12 @@ extends TileMap
 
 const xMax = 10
 const yMax = 16
-var L = load("res://blocks/L.gd")
+var blocks = [load("res://blocks/L.gd")]
 
 # Declare member variables here. Examples:
-var instance = L.new()
 var time = 0
 var rng = RandomNumberGenerator.new()
+var instance = randomBlock()
 # var b = "text"
 
 
@@ -16,7 +16,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	instance.x = 5
 	instance.y = 0
-	pass # Replace with function body.
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,9 +26,10 @@ func _process(delta):
 		instance.graph(self, -1)
 		instance.y += 1
 		if(instance.graph(self, 0) or instance.y == yMax):
-			instance = L.new()
+			instance = randomBlock()
 			instance.x = 5
 			pass
 		time -= 0.5
-		pass
-	pass
+
+func randomBlock():
+	return blocks[rng.randi_range(0, blocks.size() - 1)].new()
