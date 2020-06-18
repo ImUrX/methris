@@ -1,10 +1,11 @@
 extends "res://blocks/Block.gd"
 
 func _init():
-	matrix[1][2] = true
-	matrix[0][2] = true # |
-	matrix[0][1] = true # |
-	matrix[0][0] = true # |_
+	size = 3
+	matrix[2][2] = true
+	matrix[1][2] = true # |
+	matrix[1][1] = true # |
+	matrix[1][0] = true # |_
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():
