@@ -2,8 +2,8 @@ extends Node
 
 var matrix = []
 
-var y = 0
-var x = 0
+var x = 16
+var y = -1
 var size = 4
 
 # Declare member variables here. Examples:
