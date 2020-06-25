@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Methris"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=710
+
 [input]
 
 flip={

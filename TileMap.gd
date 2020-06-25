@@ -11,12 +11,6 @@ var rng = RandomNumberGenerator.new()
 var instance = randomBlock()
 # var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	instance.x = 5
-	instance.y = 0
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta
@@ -44,9 +38,8 @@ func _process(delta):
 		var try = instance.tryGraph(self, 0)
 		instance.y -= 1
 		instance.graph(self, 0)
-		if(try or instance.y >= yMax):
+		if(try):
 			instance = randomBlock()
-			instance.x = 5
 			time -= 0.5
 			return
 		instance.graph(self, -1)
