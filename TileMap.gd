@@ -1,8 +1,8 @@
 extends TileMap
 
 
-const xMax = 10
-const yMax = 16
+const xMax = [10,19]
+const yMax = [0,19]
 var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd")]
 
 # Declare member variables here. Examples:
