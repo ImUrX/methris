@@ -1,8 +1,8 @@
 extends TileMap
 
 
-const xMax = [10,19]
-const yMax = [0,19]
+const xMax = [10,20]
+const yMax = [0,20]
 var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd")]
 
 # Declare member variables here. Examples:
@@ -39,14 +39,22 @@ func _process(delta):
 		instance.y -= 1
 		instance.graph(self, 0)
 		if(try):
-			var aux = false
+			var lastY = -1
 			for i in range(instance.size):
 				if(fullLine(instance.y - i)):
-					aux = true
-					for j in range (10, 20):
+					lastY = instance.y - i
+					for j in range (xMax[0], xMax[1]):
 						self.set_cell(j, instance.y - i, -1)
 					#agregar puntitos
-						
+			var ran = range(yMax[0], lastY - 1)
+			ran.invert()
+			if lastY >= yMax[0]:
+				for i in range(xMax[0], xMax[1]):
+					print("x" + str(i))
+					for j in ran:
+						print(j)
+						self.set_cell(i, j + 1, self.get_cell(i, j))
+						self.set_cell(i, j, -1)
 					
 
 			instance = randomBlock()
