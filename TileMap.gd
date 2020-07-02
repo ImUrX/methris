@@ -46,7 +46,7 @@ func _process(delta):
 					for j in range (xMax[0], xMax[1]):
 						self.set_cell(j, instance.y - i, -1)
 					#agregar puntitos
-			var ran = range(yMax[0], lastY - 1)
+			var ran = range(yMax[0], lastY)
 			ran.invert()
 			if lastY >= yMax[0]:
 				for i in range(xMax[0], xMax[1]):
