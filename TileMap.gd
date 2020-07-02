@@ -77,7 +77,7 @@ func fullLine(y: int):
 	return true
 	
 func addScore(num: int):
-	sum = 0
-	for(int i = 0, i < num, i++):
+	var sum = 0
+	for i in range(0, num):
 		sum = (sum + 100) + (sum + 100) * 0.2 * num
 	return sum
