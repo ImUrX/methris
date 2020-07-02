@@ -3,7 +3,7 @@ extends TileMap
 
 const xMax = [10,19]
 const yMax = [0,19]
-var blocks = [load("res://blocks/Stick.gd"), load("res://blocks/J.gd"), load("res://blocks/S.gd"), load("res://blocks/Z.gd")]
+var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd")]
 
 # Declare member variables here. Examples:
 var time = 0
@@ -39,6 +39,16 @@ func _process(delta):
 		instance.y -= 1
 		instance.graph(self, 0)
 		if(try):
+			var aux = false
+			for i in range(instance.size):
+				if(fullLine(instance.y - i)):
+					aux = true
+					for j in range (10, 20):
+						self.set_cell(j, instance.y - i, -1)
+					#agregar puntitos
+						
+					
+
 			instance = randomBlock()
 			time -= 0.5
 			return
@@ -49,3 +59,8 @@ func _process(delta):
 
 func randomBlock():
 	return blocks[rng.randi_range(0, blocks.size() - 1)].new()
+
+func fullLine(y: int):
+	for x in range(10, 20):
+		if(self.get_cell(x, y) != 0): return false
+	return true
