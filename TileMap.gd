@@ -75,3 +75,9 @@ func fullLine(y: int):
 	for x in range(10, 20):
 		if(self.get_cell(x, y) != 0): return false
 	return true
+	
+func addScore(num: int):
+	sum = 0
+	for(int i = 0, i < num, i++):
+		sum = (sum + 100) + (sum + 100) * 0.2 * num
+	return sum
