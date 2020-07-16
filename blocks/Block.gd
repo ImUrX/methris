@@ -12,10 +12,10 @@ var defaultTile = 3
 # var b = "text"
 
 func _init():
-	for x in range(size):
+	for _x in range(size):
 		matrix.append([])
 		for _y in range(size):
-			matrix[x].append(false)
+			matrix[_x].append(false)
 
 func graph(tilemap: TileMap, tile: int):
 	if tile == 0:

@@ -11,6 +11,9 @@ var controls = load("res://Controls.gd").new()
 var instance
 # var b = "text"
 
+signal fullLineDone(y)
+signal allFullLineDone()
+
 func _ready():
 	rng.randomize()
 	instance = randomBlock()
@@ -49,18 +52,22 @@ func _process(delta):
 	instance.y -= 1
 	instance.graph(self, 0)
 	if(try):
+		var success = false
 		for i in range(instance.size):
-			if(not fullLine(instance.y - i)): continue
-			var ran = range(yMax[0], instance.y - i)
+			var y = instance.y - i
+			if(not fullLine(y)): continue
+			success = true
+			emit_signal("fullLineDone", y)
+			var ran = range(yMax[0], y)
 			ran.invert()
 			for j in range (xMax[0], xMax[1]):
 				self.set_cell(j, instance.y - i, -1)
-			for i in range(xMax[0], xMax[1]):
-				for j in ran:
-					self.set_cell(i, j + 1, self.get_cell(i, j))
-					self.set_cell(i, j, -1)
+			for j in range(xMax[0], xMax[1]):
+				for k in ran:
+					self.set_cell(j, k + 1, self.get_cell(j, k))
+					self.set_cell(j, k, -1)
 				#agregar puntitos
-		
+		if success: emit_signal("allFullLineDone")
 		instance = randomBlock()
 		return
 	instance.graph(self, -1)
@@ -78,6 +85,6 @@ func fullLine(y: int):
 	
 func addScore(num: int):
 	var sum = 0
-	for i in range(0, num):
+	for _i in range(0, num):
 		sum = (sum + 100) + (sum + 100) * 0.2 * num
 	return sum
