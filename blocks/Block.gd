@@ -5,6 +5,7 @@ var matrix = []
 var x = 16
 var y = -1
 var size = 4
+var defaultTile = 3
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -17,6 +18,8 @@ func _init():
 			matrix[x].append(false)
 
 func graph(tilemap: TileMap, tile: int):
+	if tile == 0:
+		tile = defaultTile
 	for toX in range(size):
 		for toY in range(size):
 			if(not matrix[toX][toY]): continue

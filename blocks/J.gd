@@ -1,6 +1,7 @@
 extends "res://blocks/Block.gd"
 
 func _init():
+	defaultTile = 6
 	size = 3
 	matrix[0][2] = true
 	matrix[1][2] = true # |
