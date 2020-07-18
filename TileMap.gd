@@ -53,7 +53,7 @@ func _process(delta):
 	instance.graph(self, 0)
 	if(try):
 		var success = false
-		for i in range(instance.size):
+		for i in range(-1, instance.size):
 			var y = instance.y - i
 			if(not fullLine(y)): continue
 			success = true
