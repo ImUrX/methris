@@ -2,7 +2,7 @@ extends TileMap
 
 const xMax = [10,20]
 const yMax = [0,20]
-var blocks = [load("res://blocks/Stick.gd")]
+var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd"), load("res://blocks/S.gd"), load("res://blocks/Z.gd")]
 
 # Declare member variables here. Examples:
 var time = 0

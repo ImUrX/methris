@@ -47,8 +47,11 @@ func _on_TileMap_flip():
 func _on_TileMap_fullLineDone(_y: int):
 	var ran = range(get_parent().yMax[0], _y)
 	ran.invert()
+	var suma = 0
 	for j in range (get_parent().xMax[0], get_parent().xMax[1]):
+		suma += self.get_cell(j, _y)
 		self.set_cell(j, _y, -1) # aca estoy borrando la linea
+	print("conseguiste %d puntos" % suma)
 	for j in range(get_parent().xMax[0], get_parent().xMax[1]):
 		for k in ran:
 			self.set_cell(j, k + 1, self.get_cell(j, k))
