@@ -2,7 +2,7 @@ extends TileMap
 
 const xMax = [10,20]
 const yMax = [0,20]
-var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd"), load("res://blocks/S.gd"), load("res://blocks/Z.gd")]
+var blocks = [load("res://blocks/Stick.gd")]
 
 # Declare member variables here. Examples:
 var time = 0
@@ -60,9 +60,10 @@ func _process(delta):
 	instance.graph(self, 0)
 	if(try):
 		var success = false
-		for i in range(-1, instance.size):
+		for i in range(1, instance.size + 1):
 			var y = instance.y - i
 			if(not fullLine(y)): continue
+			instance.y += 1
 			success = true
 			emit_signal("fullLineDone", y)
 			var ran = range(yMax[0], y)

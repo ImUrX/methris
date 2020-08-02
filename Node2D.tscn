@@ -71,7 +71,7 @@ resource_local_to_scene = true
 4/name = "Alert00.png 4"
 4/texture = ExtResource( 5 )
 4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 0.321569, 0.321569, 1 )
+4/modulate = Color( 1, 0.203125, 0.203125, 1 )
 4/region = Rect2( 0, 0, 32, 32 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
@@ -85,7 +85,7 @@ resource_local_to_scene = true
 5/name = "Alert00.png 5"
 5/texture = ExtResource( 5 )
 5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 0.235294, 0.854902, 1, 1 )
+5/modulate = Color( 0.300781, 0.871572, 1, 1 )
 5/region = Rect2( 0, 0, 32, 32 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
@@ -328,6 +328,7 @@ resource_local_to_scene = true
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 1, 0 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
