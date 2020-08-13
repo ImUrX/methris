@@ -31,8 +31,7 @@ func _on_TileMap_allFullLineDone():
 			var color = tetris.get_cell(x, j)
 			if color < 4: continue
 			self.set_cell(x, j, color)
-			var t = get_node("Timer")
-			t.start(1)
+			$Timer.start(1)
 
 
 func _on_Timer_timeout():

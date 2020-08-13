@@ -47,9 +47,9 @@ func flip(tilemap: TileMap):
 	if(tryGraph(tilemap, 0)):
 		matrix = copy
 		graph(tilemap, 0)
-		return true
+		return false
 	graph(tilemap, 0)
-	return false
+	return true
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():
