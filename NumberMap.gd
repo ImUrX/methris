@@ -15,6 +15,7 @@ func _init():
 
 func _ready():
 	rng.randomize()
+	get_parent().actualizarScore()
 
 func _on_TileMap_newBlock(block):
 	self.x = block.x
@@ -47,15 +48,14 @@ func _on_TileMap_flip():
 func _on_TileMap_fullLineDone(_y: int):
 	var ran = range(get_parent().yMax[0], _y)
 	ran.invert()
-	var suma = 0
 	for j in range (get_parent().xMax[0], get_parent().xMax[1]):
-		suma += self.get_cell(j, _y)
+		get_parent().score += self.get_cell(j, _y)
 		self.set_cell(j, _y, -1) # aca estoy borrando la linea
-	print("conseguiste %d puntos" % suma)
 	for j in range(get_parent().xMax[0], get_parent().xMax[1]):
 		for k in ran:
 			self.set_cell(j, k + 1, self.get_cell(j, k))
 			self.set_cell(j, k, -1)
+	get_parent().actualizarScore()
 
 func resetMatrix():
 	for _x in range(4):
@@ -67,3 +67,5 @@ func graph(tile = null):
 		for toY in range(self.size):
 			if(self.matrix[toX][toY] is bool): continue
 			self.set_cell(toX + self.x - self.size, toY + self.y - self.size, self.matrix[toX][toY] if tile == null else tile)
+			
+

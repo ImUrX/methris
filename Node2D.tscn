@@ -349,6 +349,15 @@ tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
 script = ExtResource( 9 )
+
+[node name="ScoreLabel" type="Label" parent="TileMap/NumberMap"]
+margin_left = 536.212
+margin_top = 38.4037
+margin_right = 634.212
+margin_bottom = 63.4037
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
 [connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]

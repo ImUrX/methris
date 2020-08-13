@@ -9,7 +9,7 @@ var time = 0
 var rng = RandomNumberGenerator.new()
 var controls = load("res://Controls.gd").new()
 var instance
-var score
+var score = 0
 # var b = "text"
 
 signal fullLineDone(y)
@@ -93,6 +93,5 @@ func fullLine(y: int):
 		if not (self.get_cell(x, y) >= 3): return false
 	return true
 	
-func addScore():
-	
-	return
+func actualizarScore():
+	$NumberMap/ScoreLabel.set_text("Score: %d" % score)
