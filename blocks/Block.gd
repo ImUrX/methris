@@ -37,7 +37,7 @@ func tryGraph(tilemap: TileMap, tile: int):
 func flip(tilemap: TileMap):
 	var copy = matrix.duplicate(true)
 	var copy2
-	for toX in range(size):
+	for toX in range(size): #invertir esto para q pase bien
 		for toY in range(size):
 			matrix[toX][toY] = copy[size - toY - 1][toX]
 	copy2 = matrix
