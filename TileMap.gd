@@ -77,6 +77,12 @@ func _process(delta):
 					self.set_cell(j, k, -1)
 				#agregar puntitos
 		if success: emit_signal("allFullLineDone")
+		#Termina de checkear si las líneas estaban completas y si estaban, las borra y corrige acorde.
+		#Antes de agregar un nuevo bloque, checkea si el jugador perdió:
+		for i in range(xMax[0], xMax[1]):
+			if(self.get_cell(i, yMax[1]+1) != -1):
+				get_tree().reload_current_scene()
+				get_tree().change_scene("res://youlose.tscn")
 		instance = randomBlock()
 		emit_signal("newBlock", instance)
 		return
