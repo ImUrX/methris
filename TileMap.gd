@@ -80,8 +80,10 @@ func _process(delta):
 		#Termina de checkear si las líneas estaban completas y si estaban, las borra y corrige acorde.
 		#Antes de agregar un nuevo bloque, checkea si el jugador perdió:
 		for i in range(xMax[0], xMax[1]):
-			if(self.get_cell(i, yMax[1]+1) != -1):
-				get_tree().reload_current_scene()
+			if(self.get_cell(i, yMax[0]-1) != -1):
+				global.lastScore = score
+				print("perdio")
+				uploadScore()
 				get_tree().change_scene("res://youlose.tscn")
 		instance = randomBlock()
 		emit_signal("newBlock", instance)
@@ -98,6 +100,24 @@ func fullLine(y: int):
 	for x in range(10, 20):
 		if not (self.get_cell(x, y) >= 3): return false
 	return true
-	
+
+var sentScore = false
+func uploadScore():
+	if sentScore: return
+	sentScore = true
+	var params
+	if OS.has_feature("JavaScript"):
+		params = JavaScript.eval("""
+			let url = new URL(window.location.href);
+			return [url.searchParams.get(\"user\"), url.searchParams.get(\"token\")];
+		""")
+	if params == null: return
+	var data = JSON.print({
+		"score": score,
+		"time": OS.get_system_time_msecs()
+	})
+	var headers = ["Content-Type: application/json"]
+	$HTTPRequest.request("https://paginatetris2.firebaseio.com/scores/%s.json?access_token=%s" % params, headers, true, HTTPClient.METHOD_POST, data)
+
 func actualizarScore():
 	$NumberMap/ScoreLabel.set_text("Score: %d" % score)

@@ -19,6 +19,10 @@ config/name="Methris"
 run/main_scene="res://Control.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://global.gd"
+
 [display]
 
 window/size/height=710
