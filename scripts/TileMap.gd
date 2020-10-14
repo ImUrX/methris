@@ -7,6 +7,7 @@ var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("r
 # Declare member variables here. Examples:
 var time = 0
 var rng = RandomNumberGenerator.new()
+var start_round = OS.get_unix_time()
 var controls = load("res://scripts/Controls.gd").new()
 var instance
 var score = 0
@@ -144,13 +145,15 @@ func uploadScore():
 			let url = new URL(window.location.href);
 			return [url.searchParams.get(\"user\"), url.searchParams.get(\"token\")];
 		""")
+	print(params)
 	if params == null: return
 	var data = JSON.print({
 		"score": score,
-		"time": OS.get_system_time_msecs()
+		"time": OS.get_system_time_msecs(),
+		"duration": OS.get_unix_time() - start_round
 	})
 	var headers = ["Content-Type: application/json"]
-	$HTTPRequest.request("https://paginatetris2.firebaseio.com/scores/%s.json?access_token=%s" % params, headers, true, HTTPClient.METHOD_POST, data)
+	$ScoreUpdate.request("https://paginatetris2.firebaseio.com/scores/%s.json?access_token=%s" % params, headers, true, HTTPClient.METHOD_POST, data)
 
 func actualizarScore():
 	$NumberMap/ScoreLabel.set_text("Score: %d" % score)

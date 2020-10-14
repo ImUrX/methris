@@ -655,7 +655,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HTTPRequest" type="HTTPRequest" parent="TileMap"]
+[node name="ScoreUpdate" type="HTTPRequest" parent="TileMap"]
 pause_mode = 2
 
 [node name="GameOver" type="Node2D" parent="TileMap"]
@@ -774,15 +774,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
-[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]
-[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
-[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
+[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]
 [connection signal="pressed" from="TileMap/GameOver/tryagain/tryagainbutton" to="TileMap/GameOver" method="_on_tryagainbutton_pressed"]
