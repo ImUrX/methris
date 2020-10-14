@@ -35,15 +35,19 @@ func tryGraph(tilemap: TileMap, tile: int):
 	return false
 
 func flip(tilemap: TileMap):
-	var copy = matrix.duplicate(true)
-	var copy2
-	for toX in range(size): #invertir esto para q pase bien
+	var copy = matrix
+	var matrixT = matrix.duplicate(true)
+	for toX in range(size):
 		for toY in range(size):
-			matrix[toX][toY] = copy[size - toY - 1][toX]
-	copy2 = matrix
-	matrix = copy
+			matrixT[toY][toX] = matrix[toX][toY] #transpose
+	for toX in range(size/2):
+		var arr_copy = matrixT[toX]
+		var mirror = size - 1 - toX
+		matrixT[toX] = matrixT[mirror]
+		matrixT[mirror] = arr_copy
+		
 	graph(tilemap, -1)
-	matrix = copy2
+	matrix = matrixT
 	if(tryGraph(tilemap, 0)):
 		matrix = copy
 		graph(tilemap, 0)
@@ -51,6 +55,12 @@ func flip(tilemap: TileMap):
 	graph(tilemap, 0)
 	return true
 
+func get_lowest_collission(tilemap: TileMap):
+	while true:
+		y += 1
+		if tryGraph(tilemap, 0):
+			y -= 1
+			return
 # Called when the node enters the scene tree for the first time.
 #func _ready():
 #	pass # Replace with function body.

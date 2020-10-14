@@ -1,36 +1,25 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://sprites/cubo.png" type="Texture" id=1]
-[ext_resource path="res://TileMap.gd" type="Script" id=2]
-[ext_resource path="res://sprites/rsz_borde.png" type="Texture" id=3]
-[ext_resource path="res://sprites/rsz_esquina.png" type="Texture" id=4]
+[ext_resource path="res://sprites/borde_threeway.png" type="Texture" id=1]
+[ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://sprites/borde.png" type="Texture" id=3]
+[ext_resource path="res://sprites/borde_esquina.png" type="Texture" id=4]
 [ext_resource path="res://sprites/Alert00.png" type="Texture" id=5]
-[ext_resource path="res://AnimationMap.gd" type="Script" id=6]
+[ext_resource path="res://scripts/AnimationMap.gd" type="Script" id=6]
 [ext_resource path="res://animations/glow/glow.tres" type="Texture" id=7]
 [ext_resource path="res://sprites/Numeros.png" type="Texture" id=8]
-[ext_resource path="res://NumberMap.gd" type="Script" id=9]
-[ext_resource path="res://Pause.gd" type="Script" id=10]
+[ext_resource path="res://scripts/NumberMap.gd" type="Script" id=9]
+[ext_resource path="res://fonts/MinecraftFont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scripts/GameOver.gd" type="Script" id=11]
+[ext_resource path="res://scripts/Pause.gd" type="Script" id=12]
+[ext_resource path="res://sprites/Fondo.png" type="Texture" id=13]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
-0/name = "cubo.png 0"
-0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 32, 32, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
 1/name = "rsz_borde.png 1"
 1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
+1/modulate = Color( 1, 0.6, 0, 1 )
 1/region = Rect2( 0, 0, 32, 32 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
@@ -44,7 +33,7 @@ resource_local_to_scene = true
 2/name = "rsz_esquina.png 2"
 2/texture = ExtResource( 4 )
 2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
+2/modulate = Color( 1, 0.6, 0, 1 )
 2/region = Rect2( 0, 0, 32, 32 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
@@ -167,6 +156,20 @@ resource_local_to_scene = true
 10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
+11/name = "borde_threeway.png 11"
+11/texture = ExtResource( 1 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 0.6, 0, 1 )
+11/region = Rect2( 0, 0, 32, 32 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
 
 [sub_resource type="TileSet" id=2]
 0/name = "glow.tres 0"
@@ -188,7 +191,7 @@ resource_local_to_scene = true
 0/name = "Numeros.png 0"
 0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
+0/modulate = Color( 0, 0, 0, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
@@ -202,7 +205,7 @@ resource_local_to_scene = true
 1/name = "Numeros.png 1"
 1/texture = ExtResource( 8 )
 1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
+1/modulate = Color( 0, 0, 0, 1 )
 1/region = Rect2( 32, 0, 32, 32 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
@@ -216,7 +219,7 @@ resource_local_to_scene = true
 2/name = "Numeros.png 2"
 2/texture = ExtResource( 8 )
 2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
+2/modulate = Color( 0, 0, 0, 1 )
 2/region = Rect2( 64, 0, 32, 32 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
@@ -230,7 +233,7 @@ resource_local_to_scene = true
 3/name = "Numeros.png 3"
 3/texture = ExtResource( 8 )
 3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
+3/modulate = Color( 0, 0, 0, 1 )
 3/region = Rect2( 96, 0, 32, 32 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
@@ -244,7 +247,7 @@ resource_local_to_scene = true
 4/name = "Numeros.png 4"
 4/texture = ExtResource( 8 )
 4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
+4/modulate = Color( 0, 0, 0, 1 )
 4/region = Rect2( 128, 0, 32, 32 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
@@ -258,7 +261,7 @@ resource_local_to_scene = true
 5/name = "Numeros.png 5"
 5/texture = ExtResource( 8 )
 5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
+5/modulate = Color( 0, 0, 0, 1 )
 5/region = Rect2( 160, 0, 32, 32 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
@@ -272,7 +275,7 @@ resource_local_to_scene = true
 6/name = "Numeros.png 6"
 6/texture = ExtResource( 8 )
 6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
+6/modulate = Color( 0, 0, 0, 1 )
 6/region = Rect2( 192, 0, 32, 32 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
@@ -286,7 +289,7 @@ resource_local_to_scene = true
 7/name = "Numeros.png 7"
 7/texture = ExtResource( 8 )
 7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
+7/modulate = Color( 0, 0, 0, 1 )
 7/region = Rect2( 224, 0, 32, 32 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
@@ -300,7 +303,7 @@ resource_local_to_scene = true
 8/name = "Numeros.png 8"
 8/texture = ExtResource( 8 )
 8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
+8/modulate = Color( 0, 0, 0, 1 )
 8/region = Rect2( 256, 0, 32, 32 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
@@ -314,7 +317,7 @@ resource_local_to_scene = true
 9/name = "Numeros.png 9"
 9/texture = ExtResource( 8 )
 9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
+9/modulate = Color( 0, 0, 0, 1 )
 9/region = Rect2( 288, 0, 32, 32 )
 9/tile_mode = 0
 9/occluder_offset = Vector2( 0, 0 )
@@ -326,14 +329,39 @@ resource_local_to_scene = true
 9/shapes = [  ]
 9/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
+
+[node name="Fondo" type="Sprite" parent="."]
+position = Vector2( 512.384, 384.141 )
+scale = Vector2( 0.639543, 0.639995 )
+texture = ExtResource( 13 )
+
+[node name="FondoJuego" type="ColorRect" parent="."]
+margin_left = 289.0
+margin_top = 3.05176e-05
+margin_right = 673.0
+margin_bottom = 672.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FondoSave" type="ColorRect" parent="."]
+margin_left = 129.345
+margin_top = 0.367416
+margin_right = 289.345
+margin_bottom = 192.367
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -524279, -1610612735, 0, -524268, -1610612735, 0, -458743, -1610612735, 0, -458732, -1610612735, 0, -393207, -1610612735, 0, -393196, -1610612735, 0, -327671, -1610612735, 0, -327660, -1610612735, 0, -262135, -1610612735, 0, -262124, -1610612735, 0, -196599, -1610612735, 0, -196588, -1610612735, 0, -131063, -1610612735, 0, -131052, -1610612735, 0, -65527, -1610612735, 0, -65516, -1610612735, 0, 9, -1073741823, 0, 20, -1073741823, 0, 65545, -1073741823, 0, 65556, -1073741823, 0, 131081, -1073741823, 0, 131092, -1073741823, 0, 196617, -1073741823, 0, 196628, -1073741823, 0, 262153, -1073741823, 0, 262164, -1073741823, 0, 327689, -1073741823, 0, 327700, -1073741823, 0, 393225, -1073741823, 0, 393236, -1073741823, 0, 458761, -1073741823, 0, 458772, -1073741823, 0, 524297, -1073741823, 0, 524308, -1073741823, 0, 589833, -1073741823, 0, 589844, -1073741823, 0, 655369, -1073741823, 0, 655380, -1073741823, 0, 720905, -1073741823, 0, 720916, -1073741823, 0, 786441, -1073741823, 0, 786452, -1073741823, 0, 851977, -1073741823, 0, 851988, -1073741823, 0, 917513, -1073741823, 0, 917524, -1073741823, 0, 983049, -1073741823, 0, 983060, -1073741823, 0, 1048585, -1073741823, 0, 1048596, -1073741823, 0, 1114121, -1073741823, 0, 1114132, -1073741823, 0, 1179657, -1073741823, 0, 1179668, -1073741823, 0, 1245193, -1073741823, 0, 1245204, -1073741823, 0, 1310729, 2, 0, 1310730, 1, 0, 1310731, 1, 0, 1310732, 1, 0, 1310733, 1, 0, 1310734, 1, 0, 1310735, 1, 0, 1310736, 1, 0, 1310737, 1, 0, 1310738, 1, 0, 1310739, 1, 0, 1310740, -1073741822, 0 )
+tile_data = PoolIntArray( -524279, -1610612735, 0, -524268, -1610612735, 0, -458743, -1610612735, 0, -458732, -1610612735, 0, -393207, -1610612735, 0, -393196, -1610612735, 0, -327671, -1610612735, 0, -327660, -1610612735, 0, -262135, -1610612735, 0, -262124, -1610612735, 0, -196599, -1610612735, 0, -196588, -1610612735, 0, -131063, -1610612735, 0, -131052, -1610612735, 0, -65527, -1610612735, 0, -65516, -1610612735, 0, 4, -1610612734, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, -1073741813, 0, 20, -1073741823, 0, 65540, -1610612735, 0, 65545, -1073741823, 0, 65556, -1073741823, 0, 131076, -1610612735, 0, 131081, -1073741823, 0, 131092, -1073741823, 0, 196612, -1610612735, 0, 196617, -1073741823, 0, 196628, -1073741823, 0, 262148, -1610612735, 0, 262153, -1073741823, 0, 262164, -1073741823, 0, 327684, 2, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, -1073741813, 0, 327700, -1073741823, 0, 393225, -1073741823, 0, 393236, -1073741823, 0, 458761, -1073741823, 0, 458772, -1073741823, 0, 524297, -1073741823, 0, 524308, -1073741823, 0, 589833, -1073741823, 0, 589844, -1073741823, 0, 655369, -1073741823, 0, 655380, -1073741823, 0, 720905, -1073741823, 0, 720916, -1073741823, 0, 786441, -1073741823, 0, 786452, -1073741823, 0, 851977, -1073741823, 0, 851988, -1073741823, 0, 917513, -1073741823, 0, 917524, -1073741823, 0, 983049, -1073741823, 0, 983060, -1073741823, 0, 1048585, -1073741823, 0, 1048596, -1073741823, 0, 1114121, -1073741823, 0, 1114132, -1073741823, 0, 1179657, -1073741823, 0, 1179668, -1073741823, 0, 1245193, -1073741823, 0, 1245204, -1073741823, 0, 1310729, 2, 0, 1310730, 1, 0, 1310731, 1, 0, 1310732, 1, 0, 1310733, 1, 0, 1310734, 1, 0, 1310735, 1, 0, 1310736, 1, 0, 1310737, 1, 0, 1310738, 1, 0, 1310739, 1, 0, 1310740, -1073741822, 0, 2687074, 0, 0, 3080245, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="AnimationMap" type="TileMap" parent="TileMap"]
@@ -352,35 +380,410 @@ format = 1
 script = ExtResource( 9 )
 
 [node name="ScoreLabel" type="Label" parent="TileMap/NumberMap"]
-margin_left = 536.212
-margin_top = 38.4037
-margin_right = 634.212
-margin_bottom = 63.4037
+margin_left = 883.499
+margin_top = 5.37984
+margin_right = 1079.5
+margin_bottom = 69.3798
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 10 )
+text = "score"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="."]
+[node name="Timer" type="Timer" parent="TileMap/NumberMap"]
+
+[node name="Calculos" type="Node" parent="TileMap/NumberMap"]
+
+[node name="0" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.922
+margin_top = 11.409
+margin_right = 1524.92
+margin_bottom = 75.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 43.409
+margin_right = 1524.92
+margin_bottom = 107.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 75.409
+margin_right = 1524.92
+margin_bottom = 139.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 107.409
+margin_right = 1524.92
+margin_bottom = 171.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="4" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 139.409
+margin_right = 1524.92
+margin_bottom = 203.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="5" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 171.409
+margin_right = 1524.92
+margin_bottom = 235.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="6" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 203.409
+margin_right = 1524.92
+margin_bottom = 267.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="7" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 235.409
+margin_right = 1524.92
+margin_bottom = 299.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="8" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 267.409
+margin_right = 1524.92
+margin_bottom = 331.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="9" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 299.409
+margin_right = 1524.92
+margin_bottom = 363.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="10" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 331.409
+margin_right = 1524.92
+margin_bottom = 395.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="11" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 363.409
+margin_right = 1524.92
+margin_bottom = 427.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="12" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 395.409
+margin_right = 1524.92
+margin_bottom = 459.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="13" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 427.409
+margin_right = 1524.92
+margin_bottom = 491.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="14" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 459.409
+margin_right = 1524.92
+margin_bottom = 523.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="15" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 491.409
+margin_right = 1524.92
+margin_bottom = 555.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="16" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 523.409
+margin_right = 1524.92
+margin_bottom = 587.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="17" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 555.409
+margin_right = 1524.92
+margin_bottom = 619.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="18" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 587.409
+margin_right = 1524.92
+margin_bottom = 651.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="19" type="Label" parent="TileMap/NumberMap/Calculos"]
+visible = false
+margin_left = 677.921
+margin_top = 619.409
+margin_right = 1524.92
+margin_bottom = 683.409
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 10 )
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="TileMap"]
+pause_mode = 2
+
+[node name="GameOver" type="Node2D" parent="TileMap"]
 pause_mode = 2
 visible = false
-margin_right = 1025.0
-margin_bottom = 711.0
-script = ExtResource( 10 )
+position = Vector2( -1, 0 )
+script = ExtResource( 11 )
+
+[node name="ColorRect" type="ColorRect" parent="TileMap/GameOver"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 1032.0
+margin_bottom = 792.0
+color = Color( 0.223529, 0.223529, 0.223529, 0.588235 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control"]
-margin_left = 572.0
-margin_top = -1.0
-margin_right = 647.0
-margin_bottom = 42.0
-text = "Pausado"
+[node name="you lose" type="Label" parent="TileMap/GameOver"]
+margin_left = 200.955
+margin_top = 102.817
+margin_right = 998.955
+margin_bottom = 367.817
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = ExtResource( 10 )
+text = "You lose! It's okay though, you did your best. Try again?"
 align = 1
 valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scoreplaceholder" type="Label" parent="TileMap/GameOver"]
+margin_left = 264.459
+margin_top = 286.0
+margin_right = 2118.46
+margin_bottom = 350.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 10 )
+text = "aca o por algun lado ponele que te muestra el score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tryagain" type="Label" parent="TileMap/GameOver"]
+margin_left = 416.0
+margin_top = 425.0
+margin_right = 592.0
+margin_bottom = 489.0
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = ExtResource( 10 )
+text = "Sure!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tryagainbutton" type="TextureButton" parent="TileMap/GameOver/tryagain"]
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 179.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="Label" parent="TileMap/GameOver"]
+margin_left = 235.371
+margin_top = 492.332
+margin_right = 887.371
+margin_bottom = 556.332
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = ExtResource( 10 )
+text = "Back to Main Menu"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menubutton" type="TextureButton" parent="TileMap/GameOver/menu"]
+margin_left = -2.0
+margin_top = -3.3598
+margin_right = 652.0
+margin_bottom = 52.6402
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="Node2D" parent="TileMap"]
+pause_mode = 2
+visible = false
+position = Vector2( -1, 0 )
+script = ExtResource( 12 )
+
+[node name="ColorRect2" type="ColorRect" parent="TileMap/Pause"]
+margin_right = 1032.0
+margin_bottom = 790.0
+color = Color( 0.223529, 0.223529, 0.223529, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TileMap/Pause"]
+margin_left = 356.864
+margin_top = 178.818
+margin_right = 605.864
+margin_bottom = 242.818
+custom_fonts/font = ExtResource( 10 )
+text = "Paused"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
 [connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
 [connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]
 [connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
+[connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]
+[connection signal="pressed" from="TileMap/GameOver/tryagain/tryagainbutton" to="TileMap/GameOver" method="_on_tryagainbutton_pressed"]
+[connection signal="pressed" from="TileMap/GameOver/menu/menubutton" to="TileMap/GameOver" method="_on_menubutton_pressed"]

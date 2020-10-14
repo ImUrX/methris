@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -12,6 +12,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
-		get_tree().paused = not get_tree().paused
+		var paused_mode = !self.visible
+		self.visible = paused_mode
+		get_tree().paused = paused_mode

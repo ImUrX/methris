@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rsz_borde.png-ef47d21b1c52cd04d51547a5f7962ff9.stex"
+path="res://.import/borde.png-811d2f8438fc06002739b94c4e99b6e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/rsz_borde.png"
-dest_files=[ "res://.import/rsz_borde.png-ef47d21b1c52cd04d51547a5f7962ff9.stex" ]
+source_file="res://sprites/borde.png"
+dest_files=[ "res://.import/borde.png-811d2f8438fc06002739b94c4e99b6e3.stex" ]
 
 [params]
 
