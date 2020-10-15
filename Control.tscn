@@ -1,28 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/MinecraftFont.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Label
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -32,7 +13,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenuButtonLabel" type="Label" parent="."]
+[node name="MainMenu" type="Node2D" parent="."]
+
+[node name="PlayMenuButtonLabel" type="Label" parent="MainMenu"]
 margin_left = 438.91
 margin_top = 338.681
 margin_right = 585.91
@@ -43,12 +26,11 @@ custom_fonts/font = ExtResource( 2 )
 text = "Play"
 align = 1
 valign = 1
-script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenuButton" type="TextureButton" parent="PlayMenuButtonLabel"]
+[node name="PlayMenuButton" type="TextureButton" parent="MainMenu/PlayMenuButtonLabel"]
 margin_left = -2.0
 margin_top = -3.0
 margin_right = 149.0
@@ -57,7 +39,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButtonLabel" type="Label" parent="."]
+[node name="OptionsMenuButtonLabel" type="Label" parent="MainMenu"]
 margin_left = 377.928
 margin_top = 428.372
 margin_right = 643.928
@@ -68,15 +50,65 @@ custom_fonts/font = ExtResource( 2 )
 text = "Options"
 align = 1
 valign = 1
-script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButton" type="TextureButton" parent="OptionsMenuButtonLabel"]
+[node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/OptionsMenuButtonLabel"]
 margin_right = 270.0
 margin_bottom = 57.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
+
+[node name="Options" type="Node2D" parent="."]
+visible = false
+
+[node name="BackLabel" type="Label" parent="Options"]
+margin_left = 377.928
+margin_top = 648.372
+margin_right = 643.928
+margin_bottom = 712.372
+mouse_filter = 0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="Options/BackLabel"]
+margin_left = 34.0
+margin_right = 226.0
+margin_bottom = 57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeLabel" type="Label" parent="Options"]
+margin_left = 48.7575
+margin_top = 39.2439
+margin_right = 297.757
+margin_bottom = 103.244
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Options/VolumeLabel"]
+margin_top = 64.0
+margin_right = 480.0
+margin_bottom = 97.0
+min_value = -50.0
+max_value = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="MainMenu/PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MainMenu/OptionsMenuButtonLabel/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
+[connection signal="pressed" from="Options/BackLabel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="value_changed" from="Options/VolumeLabel/HSlider" to="." method="_on_HSlider_value_changed"]

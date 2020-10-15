@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/borde_threeway.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/GameOver.gd" type="Script" id=11]
 [ext_resource path="res://scripts/Pause.gd" type="Script" id=12]
 [ext_resource path="res://sprites/Fondo.png" type="Texture" id=13]
+[ext_resource path="res://sounds/tetris.ogg" type="AudioStream" id=14]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -773,16 +774,20 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+autoplay = true
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
-[connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
 [connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]
-[connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
 [connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
-[connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
+[connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]
 [connection signal="pressed" from="TileMap/GameOver/tryagain/tryagainbutton" to="TileMap/GameOver" method="_on_tryagainbutton_pressed"]
