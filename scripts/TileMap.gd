@@ -139,21 +139,19 @@ func fullLine(y: int):
 	return true
 
 func uploadScore():
-	var params
+	var token
+	var userId
 	if OS.has_feature("JavaScript"):
-		params = JavaScript.eval("""
-			let url = new URL(window.location.href);
-			return [url.searchParams.get(\"user\"), url.searchParams.get(\"token\")];
-		""")
-	print(params)
-	if params == null: return
+		userId = JavaScript.eval("sessionStorage.getItem(\"userId\")")
+		token = JavaScript.eval("sessionStorage.getItem(\"token\")")
+	if token == null or userId == null: return
 	var data = JSON.print({
 		"score": score,
 		"time": OS.get_system_time_msecs(),
 		"duration": OS.get_unix_time() - start_round
 	})
 	var headers = ["Content-Type: application/json"]
-	$ScoreUpdate.request("https://paginatetris2.firebaseio.com/scores/%s.json?access_token=%s" % params, headers, true, HTTPClient.METHOD_POST, data)
+	$ScoreUpdate.request("https://paginatetris2.firebaseio.com/scores/%s.json?auth=%s" % [userId, token], headers, true, HTTPClient.METHOD_POST, data)
 
 func actualizarScore():
 	$NumberMap/ScoreLabel.set_text("Score: %d" % score)
