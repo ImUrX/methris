@@ -59,7 +59,6 @@ func _on_TileMap_flip():
 	graph()
 
 func _on_TileMap_fullLineDone(fakeY: int, _y: int):
-	print(_y)
 	var ran = range(get_parent().yMax[0], _y)
 	ran.invert()
 	var sum = 0
