@@ -9,12 +9,29 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -15)
-	pass # Replace with function body.
+	$Tutorial/tuto.texture = aux[tuto]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+export(Array, Texture) var aux
+var tuto = 0
+var tutobool = false
+
+
+func _input(event):
+	if !tutobool: return
+	var just_pressed = event.is_pressed() and not event.is_echo()
+	if just_pressed and (event is InputEventKey or event is InputEventMouseButton):
+		tuto += 1
+		if tuto >= aux.size():
+			tutobool = false
+			$Tutorial.visible = false
+			$MainMenu.visible = true
+			tuto = 0
+		$Tutorial/tuto.texture = aux[tuto]
+		
 
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://Game.tscn")
@@ -32,3 +49,12 @@ func _on_HSlider_value_changed(value):
 func _on_BackButton_pressed():
 	$MainMenu.visible = true
 	$Options.visible = false
+
+
+func _on_TutorialMenuButton_pressed():
+	$MainMenu.visible = false
+	$Tutorial.visible = true
+	tutobool = true
+
+
+

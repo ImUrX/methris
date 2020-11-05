@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/MinecraftFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sprites/tuto.png" type="Texture" id=3]
+[ext_resource path="res://sprites/help.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -12,13 +14,14 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+aux = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
 [node name="MainMenu" type="Node2D" parent="."]
 
 [node name="PlayMenuButtonLabel" type="Label" parent="MainMenu"]
-margin_left = 438.91
+margin_left = 446.514
 margin_top = 338.681
-margin_right = 585.91
+margin_right = 593.514
 margin_bottom = 402.681
 mouse_filter = 0
 custom_styles/normal = SubResource( 1 )
@@ -40,10 +43,10 @@ __meta__ = {
 }
 
 [node name="OptionsMenuButtonLabel" type="Label" parent="MainMenu"]
-margin_left = 377.928
-margin_top = 428.372
-margin_right = 643.928
-margin_bottom = 492.372
+margin_left = 381.514
+margin_top = 500.468
+margin_right = 647.514
+margin_bottom = 564.468
 mouse_filter = 0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -57,6 +60,30 @@ __meta__ = {
 [node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/OptionsMenuButtonLabel"]
 margin_right = 270.0
 margin_bottom = 57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialMenuButtonLabel2" type="Label" parent="MainMenu"]
+margin_left = 376.514
+margin_top = 418.473
+margin_right = 647.514
+margin_bottom = 482.473
+mouse_filter = 0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Tutorial"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialMenuButton" type="TextureButton" parent="MainMenu/TutorialMenuButtonLabel2"]
+margin_left = -6.10352e-05
+margin_top = -4.24265
+margin_right = 270.0
+margin_bottom = 52.7574
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,7 +135,16 @@ max_value = 10.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tutorial" type="Node2D" parent="."]
+visible = false
+
+[node name="tuto" type="Sprite" parent="Tutorial"]
+position = Vector2( 531.6, 375.762 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 3 )
 [connection signal="pressed" from="MainMenu/PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="MainMenu/OptionsMenuButtonLabel/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
+[connection signal="pressed" from="MainMenu/TutorialMenuButtonLabel2/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]
 [connection signal="pressed" from="Options/BackLabel/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="value_changed" from="Options/VolumeLabel/HSlider" to="." method="_on_HSlider_value_changed"]
