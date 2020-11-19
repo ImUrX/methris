@@ -1,30 +1,81 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/MinecraftFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://sprites/tuto.png" type="Texture" id=3]
 [ext_resource path="res://sprites/help.png" type="Texture" id=4]
+[ext_resource path="res://sprites/Fondo.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.124, 0.125, 0.249, 0.25, 0.374, 0.375, 0.499, 0.5, 0.624, 0.625, 0.749, 0.75, 1 )
+colors = PoolColorArray( 0, 0, 1, 0, 0, 0, 1, 0.0392157, 0, 0, 1, 0.0980392, 0, 0, 1, 0.0980392, 0, 0, 1, 0.196078, 0, 0, 1, 0.196078, 0, 0, 1, 0.294118, 0, 0, 1, 0.294118, 0, 0, 1, 0.392157, 0, 0, 1, 0.392157, 0, 0, 1, 0.490196, 0, 0, 1, 0.490196, 0, 0, 1, 0.588235, 0, 0, 1, 0.588235 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 500
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -0.840942
+margin_top = -0.84082
+margin_right = -0.840942
+margin_bottom = -0.84082
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 aux = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
+[node name="Fondo" type="Sprite" parent="."]
+position = Vector2( 513.621, 379.98 )
+scale = Vector2( 0.653333, 0.653333 )
+texture = ExtResource( 5 )
+
 [node name="MainMenu" type="Node2D" parent="."]
 
-[node name="PlayMenuButtonLabel" type="Label" parent="MainMenu"]
-margin_left = 446.514
-margin_top = 338.681
-margin_right = 593.514
-margin_bottom = 402.681
+[node name="TetrisLabel" type="Label" parent="MainMenu"]
+margin_left = 337.824
+margin_top = 39.3391
+margin_right = 610.824
+margin_bottom = 103.339
+rect_scale = Vector2( 2, 2 )
 mouse_filter = 0
-custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 1, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 4
+text = "TETRIS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GradiantBotones" type="TextureRect" parent="MainMenu"]
+margin_left = 436.0
+margin_top = 185.665
+margin_right = 1032.0
+margin_bottom = 767.665
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayMenuButtonLabel" type="Label" parent="MainMenu/GradiantBotones"]
+margin_left = 370.514
+margin_top = 89.0158
+margin_right = 517.514
+margin_bottom = 153.016
+mouse_filter = 0
+custom_styles/normal = SubResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Play"
 align = 1
@@ -33,7 +84,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenuButton" type="TextureButton" parent="MainMenu/PlayMenuButtonLabel"]
+[node name="PlayMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/PlayMenuButtonLabel"]
 margin_left = -2.0
 margin_top = -3.0
 margin_right = 149.0
@@ -42,13 +93,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButtonLabel" type="Label" parent="MainMenu"]
-margin_left = 381.514
-margin_top = 500.468
-margin_right = 647.514
-margin_bottom = 564.468
+[node name="OptionsMenuButtonLabel" type="Label" parent="MainMenu/GradiantBotones"]
+margin_left = 305.514
+margin_top = 250.803
+margin_right = 571.514
+margin_bottom = 314.803
 mouse_filter = 0
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 align = 1
@@ -57,20 +108,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/OptionsMenuButtonLabel"]
+[node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/OptionsMenuButtonLabel"]
 margin_right = 270.0
 margin_bottom = 57.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TutorialMenuButtonLabel2" type="Label" parent="MainMenu"]
-margin_left = 376.514
-margin_top = 418.473
-margin_right = 647.514
-margin_bottom = 482.473
+[node name="TutorialMenuButtonLabel2" type="Label" parent="MainMenu/GradiantBotones"]
+margin_left = 300.514
+margin_top = 168.808
+margin_right = 571.514
+margin_bottom = 232.808
 mouse_filter = 0
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Tutorial"
 align = 1
@@ -79,7 +130,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TutorialMenuButton" type="TextureButton" parent="MainMenu/TutorialMenuButtonLabel2"]
+[node name="TutorialMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/TutorialMenuButtonLabel2"]
 margin_left = -6.10352e-05
 margin_top = -4.24265
 margin_right = 270.0
@@ -97,7 +148,7 @@ margin_top = 648.372
 margin_right = 643.928
 margin_bottom = 712.372
 mouse_filter = 0
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Back"
 align = 1
@@ -143,8 +194,8 @@ visible = false
 position = Vector2( 531.6, 375.762 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
-[connection signal="pressed" from="MainMenu/PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="MainMenu/OptionsMenuButtonLabel/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
-[connection signal="pressed" from="MainMenu/TutorialMenuButtonLabel2/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/OptionsMenuButtonLabel/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/TutorialMenuButtonLabel2/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]
 [connection signal="pressed" from="Options/BackLabel/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="value_changed" from="Options/VolumeLabel/HSlider" to="." method="_on_HSlider_value_changed"]
