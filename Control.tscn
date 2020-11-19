@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/MinecraftFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://sprites/tuto.png" type="Texture" id=3]
 [ext_resource path="res://sprites/help.png" type="Texture" id=4]
 [ext_resource path="res://sprites/Fondo.png" type="Texture" id=5]
+[ext_resource path="res://sprites/opcionesboton.png" type="Texture" id=6]
+[ext_resource path="res://sprites/Torre.png" type="Texture" id=7]
+[ext_resource path="res://sprites/jugarboton.png" type="Texture" id=8]
+[ext_resource path="res://sprites/tutorialboton.png" type="Texture" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.124, 0.125, 0.249, 0.25, 0.374, 0.375, 0.499, 0.5, 0.624, 0.625, 0.749, 0.75, 1 )
@@ -15,8 +19,6 @@ gradient = SubResource( 1 )
 width = 500
 
 [sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -59,85 +61,59 @@ __meta__ = {
 }
 
 [node name="GradiantBotones" type="TextureRect" parent="MainMenu"]
-margin_left = 436.0
-margin_top = 185.665
-margin_right = 1032.0
-margin_bottom = 767.665
+margin_left = 440.36
+margin_top = 189.893
+margin_right = 1036.36
+margin_bottom = 771.893
 texture = SubResource( 2 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenuButtonLabel" type="Label" parent="MainMenu/GradiantBotones"]
-margin_left = 370.514
-margin_top = 89.0158
-margin_right = 517.514
-margin_bottom = 153.016
-mouse_filter = 0
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = ExtResource( 2 )
-text = "Play"
-align = 1
-valign = 1
+[node name="jugarboton" type="Sprite" parent="MainMenu/GradiantBotones"]
+position = Vector2( 386, 112 )
+texture = ExtResource( 8 )
+
+[node name="PlayMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/jugarboton"]
+margin_left = -141.0
+margin_top = -43.0
+margin_right = 142.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/PlayMenuButtonLabel"]
-margin_left = -2.0
-margin_top = -3.0
-margin_right = 149.0
-margin_bottom = 61.0
+[node name="tutorialboton" type="Sprite" parent="MainMenu/GradiantBotones"]
+position = Vector2( 386, 280 )
+texture = ExtResource( 9 )
+
+[node name="TutorialMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/tutorialboton"]
+margin_left = -143.0
+margin_top = -41.0
+margin_right = 141.0
+margin_bottom = 39.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButtonLabel" type="Label" parent="MainMenu/GradiantBotones"]
-margin_left = 305.514
-margin_top = 250.803
-margin_right = 571.514
-margin_bottom = 314.803
-mouse_filter = 0
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = ExtResource( 2 )
-text = "Options"
-align = 1
-valign = 1
+[node name="opcionesboton" type="Sprite" parent="MainMenu/GradiantBotones"]
+position = Vector2( 386, 448 )
+texture = ExtResource( 6 )
+
+[node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/opcionesboton"]
+margin_left = -144.0
+margin_top = -41.0
+margin_right = 142.0
+margin_bottom = 42.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/OptionsMenuButtonLabel"]
-margin_right = 270.0
-margin_bottom = 57.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TutorialMenuButtonLabel2" type="Label" parent="MainMenu/GradiantBotones"]
-margin_left = 300.514
-margin_top = 168.808
-margin_right = 571.514
-margin_bottom = 232.808
-mouse_filter = 0
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = ExtResource( 2 )
-text = "Tutorial"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TutorialMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/TutorialMenuButtonLabel2"]
-margin_left = -6.10352e-05
-margin_top = -4.24265
-margin_right = 270.0
-margin_bottom = 52.7574
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Torre" type="Sprite" parent="MainMenu/GradiantBotones"]
+position = Vector2( -241.108, 195.388 )
+scale = Vector2( 0.831897, 0.677367 )
+texture = ExtResource( 7 )
 
 [node name="Options" type="Node2D" parent="."]
 visible = false
@@ -148,7 +124,7 @@ margin_top = 648.372
 margin_right = 643.928
 margin_bottom = 712.372
 mouse_filter = 0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Back"
 align = 1
@@ -194,8 +170,8 @@ visible = false
 position = Vector2( 531.6, 375.762 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
-[connection signal="pressed" from="MainMenu/GradiantBotones/PlayMenuButtonLabel/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="MainMenu/GradiantBotones/OptionsMenuButtonLabel/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
-[connection signal="pressed" from="MainMenu/GradiantBotones/TutorialMenuButtonLabel2/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/jugarboton/PlayMenuButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/tutorialboton/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]
+[connection signal="pressed" from="MainMenu/GradiantBotones/opcionesboton/OptionsMenuButton" to="." method="_on_OptionsMenuButton_pressed"]
 [connection signal="pressed" from="Options/BackLabel/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="value_changed" from="Options/VolumeLabel/HSlider" to="." method="_on_HSlider_value_changed"]
