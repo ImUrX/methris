@@ -7,6 +7,8 @@ var y = -1
 var size = 4
 var defaultTile = 3
 
+enum FLIP_STATE { FAILED, NORMAL, RIGHT, LEFT }
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -34,8 +36,8 @@ func tryGraph(tilemap: TileMap, tile: int):
 				return true
 	return false
 
-func flip(tilemap: TileMap):
-	var copy = matrix
+func flip(tilemap: TileMap, low_level: bool = false):
+	var backup = matrix
 	var matrixT = matrix.duplicate(true)
 	for toX in range(size):
 		for toY in range(size):
@@ -46,16 +48,28 @@ func flip(tilemap: TileMap):
 		matrixT[toX] = matrixT[mirror]
 		matrixT[mirror] = arr_copy
 		
-	graph(tilemap, -1)
+	if !low_level: graph(tilemap, -1)
 	matrix = matrixT
 	if(tryGraph(tilemap, 0)):
-		matrix = copy
-		graph(tilemap, 0)
+		matrix = backup
+		if !low_level: graph(tilemap, 0)
 		return false
 	graph(tilemap, 0)
 	return true
+	
+func complex_flip(tilemap: TileMap) -> int:
+	graph(tilemap, -1)
+	if flip(tilemap, true): return FLIP_STATE.NORMAL
+	x += 1
+	if flip(tilemap, true): return FLIP_STATE.RIGHT
+	x -= 2
+	if flip(tilemap, true): return FLIP_STATE.LEFT
+	x += 1
+	graph(tilemap, 0)
+	return FLIP_STATE.FAILED
+	
 
-func get_lowest_collission(tilemap: TileMap):
+func set_lowest_collission(tilemap: TileMap):
 	while true:
 		y += 1
 		if tryGraph(tilemap, 0):

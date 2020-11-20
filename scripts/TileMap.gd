@@ -2,31 +2,33 @@ extends TileMap
 
 const xMax = [10,20]
 const yMax = [0,20]
+const Block = preload("res://blocks/Block.gd")
 var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd"), load("res://blocks/S.gd"), load("res://blocks/Z.gd")]
 
 # Declare member variables here. Examples:
 var time = 0
-var rng = RandomNumberGenerator.new()
 var start_round = OS.get_unix_time()
 var controls = load("res://scripts/Controls.gd").new()
-var instance
+var instance: Block
 var score = 0
 var saved = false
 var pocket
-var pocket_instance
+var pocket_instance: Block
 
 signal fullLineDone(y, realY)
 signal allFullLineDone
-signal newBlock(instance)
+signal newBlock(instance, future)
 signal graph(x, y)
-signal flip
+signal flip(type)
 signal saveBlock
 signal loadBlock(instance)
 
 func _ready():
-	rng.randomize()
+	for blockt in blocks:
+		block_bag.append(blockt.new())
+	block_bag.shuffle()
 	instance = randomBlock()
-	emit_signal("newBlock", instance)
+	emit_signal("newBlock", instance, block_bag[0])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -36,7 +38,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("instadown"):
 		instance.graph(self, -1)
 		var originalY = instance.y
-		instance.get_lowest_collission(self)
+		instance.set_lowest_collission(self)
 		emit_signal("graph", 0, instance.y - originalY)
 		instance.graph(self, 0)
 		try = true
@@ -46,21 +48,21 @@ func _process(delta):
 		if pocket == null:
 			instance = randomBlock()
 			emit_signal("saveBlock")
-			emit_signal("newBlock", instance)
+			emit_signal("newBlock", instance, block_bag[0])
 		else:
 			pocket_instance.graph(self, -1)
 			instance = pocket.new()
 			emit_signal("loadBlock", instance)
 		pocket = block
 		pocket_instance = block.new()
-		pocket_instance.x = 8
+		pocket_instance.x = 9
 		pocket_instance.y = 5
 		pocket_instance.graph(self, 0)
 		saved = true
 	else:
-		if controls.getAction("flip"):
-			if instance.flip(self): 
-				emit_signal("flip")
+		if Input.is_action_just_pressed("flip"):
+			var state = instance.complex_flip(self)
+			if state != Block.FLIP_STATE.FAILED: emit_signal("flip", state)
 		if controls.getAction("left"):
 			instance.graph(self, -1)
 			instance.x -= 1
@@ -119,10 +121,11 @@ func _process(delta):
 			if(self.get_cell(i, yMax[0]-1) != -1):
 				global.lastScore = score
 				uploadScore()
-				get_tree().paused = true
+				$GameOver/FailSound.play()
 				$GameOver.visible = true
+				get_tree().paused = true
 		instance = randomBlock()
-		emit_signal("newBlock", instance)
+		emit_signal("newBlock", instance, block_bag[0])
 		saved = false
 		return
 	instance.graph(self, -1)
@@ -130,8 +133,25 @@ func _process(delta):
 	instance.graph(self, 0)
 	emit_signal("graph", 0, 1)
 
+var block_bag: Array = []
 func randomBlock():
-	return blocks[rng.randi_range(0, blocks.size() - 1)].new()
+	var block: Block = block_bag.pop_front()
+	if block_bag.size() == 0:
+		for blockt in blocks:
+			block_bag.append(blockt.new())
+		block_bag.shuffle()
+	block.graph(self, -1)
+	block.x = 16
+	block.y = -1
+	showFuture()
+	return block
+
+func showFuture():
+	var block: Block = block_bag[0]
+	block.x = 25
+	block.y = 5
+	block.graph(self, 0)
+	
 
 func fullLine(y: int):
 	for x in range(10, 20):

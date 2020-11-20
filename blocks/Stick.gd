@@ -3,10 +3,10 @@ extends "res://blocks/Block.gd"
 func _init():
 	defaultTile = 5
 	size = 4 # maximo 4x4
-	matrix[2][0] = true
+	matrix[0][1] = true
+	matrix[1][1] = true # |
 	matrix[2][1] = true # |
-	matrix[2][2] = true # |
-	matrix[2][3] = true # |_
+	matrix[3][1] = true # |_
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():

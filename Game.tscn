@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sprites/borde_threeway.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scripts/Pause.gd" type="Script" id=12]
 [ext_resource path="res://sprites/Fondo.png" type="Texture" id=13]
 [ext_resource path="res://sounds/tetris.ogg" type="AudioStream" id=14]
+[ext_resource path="res://sounds/fail.wav" type="AudioStream" id=15]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -333,7 +334,7 @@ resource_local_to_scene = true
 [node name="Game" type="Node2D"]
 
 [node name="Fondo" type="Sprite" parent="."]
-position = Vector2( 512.384, 384.141 )
+position = Vector2( 513.621, 379.969 )
 scale = Vector2( 0.639543, 0.639995 )
 texture = ExtResource( 13 )
 
@@ -357,12 +358,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FondoFuture" type="ColorRect" parent="."]
+margin_left = 673.345
+margin_top = 0.367416
+margin_right = 833.345
+margin_bottom = 192.367
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -524279, -1610612735, 0, -524268, -1610612735, 0, -458743, -1610612735, 0, -458732, -1610612735, 0, -393207, -1610612735, 0, -393196, -1610612735, 0, -327671, -1610612735, 0, -327660, -1610612735, 0, -262135, -1610612735, 0, -262124, -1610612735, 0, -196599, -1610612735, 0, -196588, -1610612735, 0, -131063, -1610612735, 0, -131052, -1610612735, 0, -65527, -1610612735, 0, -65516, -1610612735, 0, 4, -1610612734, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, -1073741813, 0, 20, -1073741823, 0, 65540, -1610612735, 0, 65545, -1073741823, 0, 65556, -1073741823, 0, 131076, -1610612735, 0, 131081, -1073741823, 0, 131092, -1073741823, 0, 196612, -1610612735, 0, 196617, -1073741823, 0, 196628, -1073741823, 0, 262148, -1610612735, 0, 262153, -1073741823, 0, 262164, -1073741823, 0, 327684, 2, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, -1073741813, 0, 327700, -1073741823, 0, 393225, -1073741823, 0, 393236, -1073741823, 0, 458761, -1073741823, 0, 458772, -1073741823, 0, 524297, -1073741823, 0, 524308, -1073741823, 0, 589833, -1073741823, 0, 589844, -1073741823, 0, 655369, -1073741823, 0, 655380, -1073741823, 0, 720905, -1073741823, 0, 720916, -1073741823, 0, 786441, -1073741823, 0, 786452, -1073741823, 0, 851977, -1073741823, 0, 851988, -1073741823, 0, 917513, -1073741823, 0, 917524, -1073741823, 0, 983049, -1073741823, 0, 983060, -1073741823, 0, 1048585, -1073741823, 0, 1048596, -1073741823, 0, 1114121, -1073741823, 0, 1114132, -1073741823, 0, 1179657, -1073741823, 0, 1179668, -1073741823, 0, 1245193, -1073741823, 0, 1245204, -1073741823, 0, 1310729, 2, 0, 1310730, 1, 0, 1310731, 1, 0, 1310732, 1, 0, 1310733, 1, 0, 1310734, 1, 0, 1310735, 1, 0, 1310736, 1, 0, 1310737, 1, 0, 1310738, 1, 0, 1310739, 1, 0, 1310740, -1073741822, 0, 2687074, 0, 0, 3080245, 0, 0 )
+tile_data = PoolIntArray( -524279, -1610612735, 0, -524268, -1610612735, 0, -458743, -1610612735, 0, -458732, -1610612735, 0, -393207, -1610612735, 0, -393196, -1610612735, 0, -327671, -1610612735, 0, -327660, -1610612735, 0, -262135, -1610612735, 0, -262124, -1610612735, 0, -196599, -1610612735, 0, -196588, -1610612735, 0, -131063, -1610612735, 0, -131052, -1610612735, 0, -65527, -1610612735, 0, -65516, -1610612735, 0, 4, -1610612734, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, -1073741813, 0, 20, -1610612725, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1610612738, 0, 65540, -1610612735, 0, 65545, -1073741823, 0, 65556, -1073741823, 0, 65561, -1610612735, 0, 131076, -1610612735, 0, 131081, -1073741823, 0, 131092, -1073741823, 0, 131097, -1610612735, 0, 196612, -1610612735, 0, 196617, -1073741823, 0, 196628, -1073741823, 0, 196633, -1610612735, 0, 262148, -1610612735, 0, 262153, -1073741823, 0, 262164, -1073741823, 0, 262169, -1610612735, 0, 327684, 2, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 327689, -1073741813, 0, 327700, -1610612725, 0, 327701, 1, 0, 327702, 1, 0, 327703, 1, 0, 327704, 1, 0, 327705, -1073741822, 0, 393225, -1073741823, 0, 393236, -1073741823, 0, 458761, -1073741823, 0, 458772, -1073741823, 0, 524297, -1073741823, 0, 524308, -1073741823, 0, 589833, -1073741823, 0, 589844, -1073741823, 0, 655369, -1073741823, 0, 655380, -1073741823, 0, 720905, -1073741823, 0, 720916, -1073741823, 0, 786441, -1073741823, 0, 786452, -1073741823, 0, 851977, -1073741823, 0, 851988, -1073741823, 0, 917513, -1073741823, 0, 917524, -1073741823, 0, 983049, -1073741823, 0, 983060, -1073741823, 0, 1048585, -1073741823, 0, 1048596, -1073741823, 0, 1114121, -1073741823, 0, 1114132, -1073741823, 0, 1179657, -1073741823, 0, 1179668, -1073741823, 0, 1245193, -1073741823, 0, 1245204, -1073741823, 0, 1310729, 2, 0, 1310730, 1, 0, 1310731, 1, 0, 1310732, 1, 0, 1310733, 1, 0, 1310734, 1, 0, 1310735, 1, 0, 1310736, 1, 0, 1310737, 1, 0, 1310738, 1, 0, 1310739, 1, 0, 1310740, -1073741822, 0, 2687074, 0, 0, 3080245, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="AnimationMap" type="TileMap" parent="TileMap"]
@@ -659,6 +670,13 @@ __meta__ = {
 [node name="ScoreUpdate" type="HTTPRequest" parent="TileMap"]
 pause_mode = 2
 
+[node name="Control" type="Control" parent="TileMap"]
+margin_right = 1024.0
+margin_bottom = 764.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GameOver" type="Node2D" parent="TileMap"]
 pause_mode = 2
 visible = false
@@ -748,6 +766,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FailSound" type="AudioStreamPlayer" parent="TileMap/GameOver"]
+stream = ExtResource( 15 )
+
 [node name="Pause" type="Node2D" parent="TileMap"]
 pause_mode = 2
 visible = false
@@ -775,19 +796,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="GameSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 autoplay = true
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
-[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]
-[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
-[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
+[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]
 [connection signal="pressed" from="TileMap/GameOver/tryagain/tryagainbutton" to="TileMap/GameOver" method="_on_tryagainbutton_pressed"]

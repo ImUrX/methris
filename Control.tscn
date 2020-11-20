@@ -34,7 +34,7 @@ __meta__ = {
 aux = [ ExtResource( 3 ), ExtResource( 4 ) ]
 
 [node name="Fondo" type="Sprite" parent="."]
-position = Vector2( 513.621, 379.98 )
+position = Vector2( 513.621, 379.969 )
 scale = Vector2( 0.653333, 0.653333 )
 texture = ExtResource( 5 )
 
@@ -76,10 +76,12 @@ position = Vector2( 386, 112 )
 texture = ExtResource( 8 )
 
 [node name="PlayMenuButton" type="TextureButton" parent="MainMenu/GradiantBotones/jugarboton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = -141.0
-margin_top = -43.0
-margin_right = 142.0
-margin_bottom = 40.0
+margin_top = -42.0
+margin_right = -141.0
+margin_bottom = -43.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -111,7 +113,7 @@ __meta__ = {
 }
 
 [node name="Torre" type="Sprite" parent="MainMenu/GradiantBotones"]
-position = Vector2( -241.108, 195.388 )
+position = Vector2( -248.608, 264.341 )
 scale = Vector2( 0.831897, 0.677367 )
 texture = ExtResource( 7 )
 
@@ -159,6 +161,7 @@ margin_right = 480.0
 margin_bottom = 97.0
 min_value = -50.0
 max_value = 10.0
+value = -15.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

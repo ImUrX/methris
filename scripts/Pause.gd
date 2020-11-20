@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") && !get_node("../GameOver").visible:
 		var paused_mode = !self.visible
 		self.visible = paused_mode
 		get_tree().paused = paused_mode
