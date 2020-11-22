@@ -24,6 +24,10 @@ config/name="Methris"
 run/main_scene="res://Control.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout="res://audiobuslayout.tres"
+
 [autoload]
 
 global="*res://scripts/global.gd"

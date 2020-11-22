@@ -134,7 +134,7 @@ func _on_TileMap_saveBlock():
 	self.graph(-1)
 	self.pocketMatrix = self.originalMatrix.duplicate(true)
 	self.matrix = self.originalMatrix
-	self.x = 8
+	self.x = 9
 	self.y = 5
 	self.graph()
 

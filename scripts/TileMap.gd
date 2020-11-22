@@ -21,6 +21,7 @@ signal newBlock(instance, future)
 signal graph(x, y)
 signal flip(type)
 signal saveBlock
+signal placedBlock
 signal loadBlock(instance)
 
 func _ready():
@@ -124,6 +125,7 @@ func _process(delta):
 				$GameOver/FailSound.play()
 				$GameOver.visible = true
 				get_tree().paused = true
+		emit_signal("placedBlock")
 		instance = randomBlock()
 		emit_signal("newBlock", instance, block_bag[0])
 		saved = false

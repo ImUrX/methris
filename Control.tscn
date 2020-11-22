@@ -113,7 +113,7 @@ __meta__ = {
 }
 
 [node name="Torre" type="Sprite" parent="MainMenu/GradiantBotones"]
-position = Vector2( -248.608, 264.341 )
+position = Vector2( -241.881, 282.841 )
 scale = Vector2( 0.831897, 0.677367 )
 texture = ExtResource( 7 )
 

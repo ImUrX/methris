@@ -8,8 +8,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -15)
 	$Tutorial/tuto.texture = aux[tuto]
+	$Options/VolumeLabel/HSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
