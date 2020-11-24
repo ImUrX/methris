@@ -15,5 +15,6 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("pause") && !get_node("../GameOver").visible:
 		var paused_mode = !self.visible
+		if paused_mode: $PausePlayer.play()
 		self.visible = paused_mode
 		get_tree().paused = paused_mode

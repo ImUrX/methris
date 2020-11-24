@@ -33,7 +33,7 @@ func _ready():
 #	pass
 
 
-func _on_TileMap_allFullLineDone():
+func _on_TileMap_allFullLineDone(_lines):
 	self.clear()
 	animatedGlow.oneshot = false
 	for x in range(tetris.xMax[0], tetris.xMax[1]):

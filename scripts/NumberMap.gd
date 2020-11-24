@@ -1,19 +1,20 @@
 extends TileMap
 
 const FLIP_STATE = preload("res://blocks/Block.gd").FLIP_STATE
+const TetrisMap = preload("res://scripts/TileMap.gd")
 
 var rng = RandomNumberGenerator.new()
 
+var tetris_map: TetrisMap
 var originalMatrix
 var pocketMatrix
-var future_matrix = []
-var future_size = 0
+var future_matrix := []
+var future_size := 0
 var matrix
-var negatives = {}
-var x = 16
-var y = -1
-var size = 4
-export(DynamicFont) var calc_font
+var negatives := {}
+var x := 16
+var y := -1
+var size := 4
 
 func _init():
 	for _x in range(size):
@@ -22,8 +23,9 @@ func _init():
 			future_matrix[_x].append(false)
 
 func _ready():
+	tetris_map = get_parent()
+	tetris_map.score_followers.append(funcref(self, "calc_multiplier"))
 	rng.randomize()
-	get_parent().actualizarScore()
 	for i in range(10, 20):
 		negatives[i] = (i - 10) * -1
 		self.tile_set.create_tile(i)
@@ -78,23 +80,26 @@ func flip():
 	matrix = matrixT
 	graph()
 
-func _on_TileMap_fullLineDone(fakeY: int, _y: int):
-	var ran = range(get_parent().yMax[0], _y)
+func calc_multiplier(fakeY: int, _y: int) -> float:
+	var ran = range(tetris_map.yMax[0], _y)
 	ran.invert()
 	var sum = 0
 	var buffer = []
-	for j in range (get_parent().xMax[0], get_parent().xMax[1]):
+	for j in range (tetris_map.xMax[0], tetris_map.xMax[1]):
 		var value = self.get_cell(j, _y)
 		if value in negatives: value = negatives[value]
 		buffer.append(value)
 		sum += value
 		self.set_cell(j, _y, -1) # aca estoy borrando la linea
-	get_parent().score += abs(sum)
-	for j in range(get_parent().xMax[0], get_parent().xMax[1]):
+	for j in range(tetris_map.xMax[0], tetris_map.xMax[1]):
 		for k in ran:
 			self.set_cell(j, k + 1, self.get_cell(j, k))
 			self.set_cell(j, k, -1)
-	var calc = get_node("./Calculos/" + str(fakeY))
+	show_calc(fakeY, buffer, sum)
+	return abs(sum)
+
+func show_calc(fakeY: int, buffer: Array, sum: int):
+	var calc: Label = get_node("./Calculos/" + str(fakeY))
 	var first = true
 	for num in buffer:
 		if first:
@@ -103,15 +108,11 @@ func _on_TileMap_fullLineDone(fakeY: int, _y: int):
 		else:
 			calc.text += ("+" if num >= 0 else "") + str(num)
 	calc.text += "=" + str(sum)
-	show_calc(calc)
-	get_parent().actualizarScore()
-
-func show_calc(node: Label):
-	var previous = node.text
-	node.visible = true
+	var previous = calc.text
+	calc.visible = true
 	yield(get_tree().create_timer(3.0), "timeout")
-	if node.text == previous:
-		node.visible = false
+	if calc.text == previous:
+		calc.visible = false
 
 func resetMatrix():
 	for _x in range(4):

@@ -1,10 +1,10 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://sprites/borde_threeway.png" type="Texture" id=1]
+[ext_resource path="res://sprites/game/borde_threeway.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
-[ext_resource path="res://sprites/borde.png" type="Texture" id=3]
-[ext_resource path="res://sprites/borde_esquina.png" type="Texture" id=4]
-[ext_resource path="res://sprites/Alert00.png" type="Texture" id=5]
+[ext_resource path="res://sprites/game/borde.png" type="Texture" id=3]
+[ext_resource path="res://sprites/game/borde_esquina.png" type="Texture" id=4]
+[ext_resource path="res://sprites/game/Alert00.png" type="Texture" id=5]
 [ext_resource path="res://scripts/AnimationMap.gd" type="Script" id=6]
 [ext_resource path="res://animations/glow/glow.tres" type="Texture" id=7]
 [ext_resource path="res://sprites/Numeros.png" type="Texture" id=8]
@@ -22,12 +22,8 @@
 [ext_resource path="res://sounds/flips/R3.wav" type="AudioStream" id=20]
 [ext_resource path="res://sounds/flips/R1.wav" type="AudioStream" id=21]
 [ext_resource path="res://scripts/BlockSounds.gd" type="Script" id=22]
-[ext_resource path="res://sounds/places/B5.wav" type="AudioStream" id=23]
-[ext_resource path="res://sounds/places/B4.wav" type="AudioStream" id=24]
-[ext_resource path="res://sounds/places/B6.wav" type="AudioStream" id=25]
-[ext_resource path="res://sounds/places/B1.wav" type="AudioStream" id=26]
-[ext_resource path="res://sounds/places/B2.wav" type="AudioStream" id=27]
-[ext_resource path="res://sounds/places/B3.wav" type="AudioStream" id=28]
+[ext_resource path="res://sounds/places/Bajar.wav" type="AudioStream" id=23]
+[ext_resource path="res://sounds/pause.wav" type="AudioStream" id=24]
 [ext_resource path="res://sounds/linea.wav" type="AudioStream" id=29]
 
 [sub_resource type="TileSet" id=1]
@@ -406,13 +402,13 @@ format = 1
 script = ExtResource( 9 )
 
 [node name="ScoreLabel" type="Label" parent="TileMap/NumberMap"]
-margin_left = 883.499
+margin_left = 838.499
 margin_top = 5.37984
-margin_right = 1079.5
+margin_right = 1129.5
 margin_bottom = 69.3798
 rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = ExtResource( 10 )
-text = "score"
+text = "Score: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -681,6 +677,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelLabel" type="Label" parent="TileMap"]
+margin_left = 838.499
+margin_top = 26.3798
+margin_right = 1129.5
+margin_bottom = 90.3798
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = ExtResource( 10 )
+text = "Level: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ScoreUpdate" type="HTTPRequest" parent="TileMap"]
 pause_mode = 2
 
@@ -690,16 +698,10 @@ script = ExtResource( 16 )
 flip_sounds = [ ExtResource( 21 ), ExtResource( 17 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 19 ) ]
 
 [node name="BlockSounds" type="AudioStreamPlayer" parent="TileMap"]
+volume_db = -10.0
 script = ExtResource( 22 )
-block_sounds = [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 25 ) ]
+block_sounds = [ ExtResource( 23 ) ]
 line_sound = ExtResource( 29 )
-
-[node name="Control" type="Control" parent="TileMap"]
-margin_right = 1024.0
-margin_bottom = 764.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GameOver" type="Node2D" parent="TileMap"]
 pause_mode = 2
@@ -821,22 +823,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameSound" type="AudioStreamPlayer" parent="."]
+[node name="PausePlayer" type="AudioStreamPlayer" parent="TileMap/Pause"]
+stream = ExtResource( 24 )
+bus = "Effects"
+
+[node name="GamePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 autoplay = true
-[connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
+bus = "Music"
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_allFullLineDone"]
+[connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
+[connection signal="flip" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
-[connection signal="flip" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_flip"]
-[connection signal="fullLineDone" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_fullLineDone"]
 [connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_newBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_newBlock"]
 [connection signal="placedBlock" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_placedBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]

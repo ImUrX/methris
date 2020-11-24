@@ -3,20 +3,23 @@ extends TileMap
 const xMax = [10,20]
 const yMax = [0,20]
 const Block = preload("res://blocks/Block.gd")
+const Controls = preload("res://scripts/Controls.gd")
 var blocks = [load("res://blocks/L.gd"), load("res://blocks/Square.gd"), load("res://blocks/Threeway.gd"), load("res://blocks/Stick.gd"), load("res://blocks/J.gd"), load("res://blocks/S.gd"), load("res://blocks/Z.gd")]
 
-# Declare member variables here. Examples:
-var time = 0
-var start_round = OS.get_unix_time()
-var controls = load("res://scripts/Controls.gd").new()
+var combo := -1
+var level := 1 setget level_set
+var time: float = 0
+var start_round := OS.get_unix_time()
+var controls := Controls.new()
 var instance: Block
-var score = 0
-var saved = false
+var score := 0
+var score_followers := []
+var saved := false
 var pocket
 var pocket_instance: Block
 
 signal fullLineDone(y, realY)
-signal allFullLineDone
+signal allFullLineDone(n_lines)
 signal newBlock(instance, future)
 signal graph(x, y)
 signal flip(type)
@@ -25,6 +28,8 @@ signal placedBlock
 signal loadBlock(instance)
 
 func _ready():
+	score_followers.append(funcref(self, "base_mult"))
+	
 	for blockt in blocks:
 		block_bag.append(blockt.new())
 	block_bag.shuffle()
@@ -34,7 +39,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta
-	controls._process(delta)
+	controls.process(delta)
 	var try
 	if Input.is_action_just_pressed("instadown"):
 		instance.graph(self, -1)
@@ -82,10 +87,11 @@ func _process(delta):
 			else:
 				instance.graph(self, 0)
 				emit_signal("graph", 1, 0)
+		var speed = get_speed()
 		if controls.getAction("down"):
 			time = 0
-		elif time >= 0.5:
-			time -= 0.5
+		elif time >= speed:
+			time -= speed
 		else:
 			return
 		instance.graph(self, -1)
@@ -93,7 +99,10 @@ func _process(delta):
 		try = instance.tryGraph(self, 0)
 		instance.y -= 1
 		instance.graph(self, 0)
+	
 	if(try):
+		var base_score: float = 0
+		var n_lines: int = 0
 		var success = false
 		var lastY
 		for i in range(1, instance.size + 1):
@@ -103,9 +112,14 @@ func _process(delta):
 				lastY = y
 			else:
 				lastY -= 1
+			
 			instance.y += 1
+			n_lines += 1
 			success = true
+			base_score = calc_base_score(lastY, y)
+			update_level()
 			emit_signal("fullLineDone", lastY, y)
+			
 			var ran = range(yMax[0], y)
 			ran.invert()
 			for j in range (xMax[0], xMax[1]):
@@ -114,17 +128,25 @@ func _process(delta):
 				for k in ran:
 					self.set_cell(j, k + 1, self.get_cell(j, k))
 					self.set_cell(j, k, -1)
-				#agregar puntitos
-		if success: emit_signal("allFullLineDone")
+		if success:
+			combo += 1
+			calc_score(base_score, n_lines)
+			emit_signal("allFullLineDone", n_lines)
 		#Termina de checkear si las líneas estaban completas y si estaban, las borra y corrige acorde.
 		#Antes de agregar un nuevo bloque, checkea si el jugador perdió:
 		for i in range(xMax[0], xMax[1]):
 			if(self.get_cell(i, yMax[0]-1) != -1):
 				global.lastScore = score
-				uploadScore()
+				upload_score()
 				$GameOver/FailSound.play()
 				$GameOver.visible = true
 				get_tree().paused = true
+		
+		if combo > -1:
+			score += combo * 50
+			combo = -1
+			$NumberMap/ScoreLabel.set_text("Score: %d" % self.score)
+		
 		emit_signal("placedBlock")
 		instance = randomBlock()
 		emit_signal("newBlock", instance, block_bag[0])
@@ -134,9 +156,23 @@ func _process(delta):
 	instance.y += 1
 	instance.graph(self, 0)
 	emit_signal("graph", 0, 1)
+	
+func get_speed() -> float:
+	return pow(0.8-((level-1)*0.007), level-1)
 
-var block_bag: Array = []
-func randomBlock():
+func level_set(new_level: int) -> void:
+	level = new_level
+	$LevelLabel.set_text("Level: %d" % new_level)
+
+func update_level() -> void:
+	var new_level = (score/100)/(level * 5) + 1
+	if new_level <= level: return
+	level_set(new_level)
+	if level > 20:
+		level = 20
+
+var block_bag := []
+func randomBlock() -> Block:
 	var block: Block = block_bag.pop_front()
 	if block_bag.size() == 0:
 		for blockt in blocks:
@@ -148,19 +184,19 @@ func randomBlock():
 	showFuture()
 	return block
 
-func showFuture():
+func showFuture() -> void:
 	var block: Block = block_bag[0]
 	block.x = 25
 	block.y = 5
 	block.graph(self, 0)
 	
 
-func fullLine(y: int):
+func fullLine(y: int) -> bool:
 	for x in range(10, 20):
 		if not (self.get_cell(x, y) >= 3): return false
 	return true
 
-func uploadScore():
+func upload_score() -> void:
 	var token
 	var userId
 	if OS.has_feature("JavaScript"):
@@ -175,10 +211,22 @@ func uploadScore():
 	var headers = ["Content-Type: application/json"]
 	$ScoreUpdate.request("https://paginatetris2.firebaseio.com/scores/%s.json?auth=%s" % [userId, token], headers, true, HTTPClient.METHOD_POST, data)
 
-func actualizarScore():
-	$NumberMap/ScoreLabel.set_text("Score: %d" % score)
+func base_mult(fakeY: int, _realY: int) -> float:
+	return float(level + (fakeY * -1) + 20)
 
-func get_block_type():
+func calc_base_score(fakeY: int, realY: int) -> float:
+	if self.score_followers.empty(): return .0
+	var result: float = 1
+	for follower in self.score_followers:
+		result *= (follower as FuncRef).call_func(fakeY, realY)
+	return result
+
+func calc_score(base_score: float, n_lines: int) -> void:
+	self.score += int(base_score * n_lines)
+	$NumberMap/ScoreLabel.set_text("Score: %d" % self.score)
+
+func get_block_type() -> Object:
 	for type in blocks:
 		if instance is type:
 			return type
+	return null

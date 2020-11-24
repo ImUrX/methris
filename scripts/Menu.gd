@@ -8,9 +8,12 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_process_input(true)
 	$Tutorial/tuto.texture = aux[tuto]
-	$Options/VolumeLabel/HSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
-
+	$Options/TabContainer/Audio/Control/VolumeLabel/MasterSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	$Options/TabContainer/Audio/Control/MusicLabel/MusicSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
+	$Options/TabContainer/Audio/Control/EffectLabel/EffectSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Effects"))
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -19,11 +22,10 @@ export(Array, Texture) var aux
 var tuto = 0
 var tutobool = false
 
-
 func _input(event):
 	if !tutobool: return
-	var just_pressed = event.is_pressed() and not event.is_echo()
-	if just_pressed and (event is InputEventKey or event is InputEventMouseButton):
+	var just_released = !event.is_pressed() and not event.is_echo()
+	if just_released and (event is InputEventKey or event is InputEventMouseButton):
 		tuto += 1
 		if tuto >= aux.size():
 			tutobool = false
@@ -45,6 +47,11 @@ func _on_OptionsMenuButton_pressed():
 func _on_HSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 
+func _on_MusicSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
+	
+func _on_EffectSlider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), value)
 
 func _on_BackButton_pressed():
 	$MainMenu.visible = true
@@ -55,6 +62,3 @@ func _on_TutorialMenuButton_pressed():
 	$MainMenu.visible = false
 	$Tutorial.visible = true
 	tutobool = true
-
-
-

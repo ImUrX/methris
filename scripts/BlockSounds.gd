@@ -14,7 +14,7 @@ func _on_TileMap_placedBlock():
 	self.play()
 	if block_sounds.size() > block_index + 1: block_index += 1
 
-func _on_TileMap_allFullLineDone():
+func _on_TileMap_allFullLineDone(_lines):
 	block_index = 0
 	dont_play = true
 	self.stream = line_sound

@@ -1,4 +1,3 @@
-extends Node
 var controls = {
 	"flip": {
 		"time": 0,
@@ -21,11 +20,8 @@ var controls = {
 		"slowStart": null
 	}
 }
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-func _process(delta):
+func process(delta):
 	for control in controls.keys():
 		if Input.is_action_just_pressed(control):
 			controls[control]["time"] += controls[control]["req"] + delta
