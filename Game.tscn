@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://sprites/game/borde_threeway.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
@@ -24,7 +24,13 @@
 [ext_resource path="res://scripts/BlockSounds.gd" type="Script" id=22]
 [ext_resource path="res://sounds/places/Bajar.wav" type="AudioStream" id=23]
 [ext_resource path="res://sounds/pause.wav" type="AudioStream" id=24]
+[ext_resource path="res://sprites/controls/B_izquierda.png" type="Texture" id=25]
+[ext_resource path="res://sprites/controls/B_derecha.png" type="Texture" id=26]
+[ext_resource path="res://sprites/controls/B_bajar.png" type="Texture" id=27]
+[ext_resource path="res://sprites/controls/B_abajo.png" type="Texture" id=28]
 [ext_resource path="res://sounds/linea.wav" type="AudioStream" id=29]
+[ext_resource path="res://sprites/controls/B_rotar.png" type="Texture" id=30]
+[ext_resource path="res://sprites/controls/B_guardar.png" type="Texture" id=31]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -342,6 +348,9 @@ resource_local_to_scene = true
 9/z_index = 0
 
 [node name="Game" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 672.0 ]
+}
 
 [node name="Fondo" type="Sprite" parent="."]
 position = Vector2( 513.621, 379.969 )
@@ -677,6 +686,56 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TouchControllers" type="Control" parent="TileMap"]
+modulate = Color( 1, 1, 1, 0.831373 )
+margin_right = 1024.0
+margin_bottom = 764.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 897, 476 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 26 )
+action = "right"
+visibility_mode = 1
+
+[node name="LeftButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 795, 476 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 25 )
+action = "left"
+visibility_mode = 1
+
+[node name="SaveButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 795, 580 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 31 )
+action = "save"
+visibility_mode = 1
+
+[node name="FlipButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 35, 476 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 30 )
+action = "flip"
+visibility_mode = 1
+
+[node name="SoftFallButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 139, 476 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 28 )
+action = "down"
+visibility_mode = 1
+
+[node name="HardFallButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+position = Vector2( 139, 581 )
+scale = Vector2( 0.257165, 0.257165 )
+normal = ExtResource( 27 )
+action = "instadown"
+visibility_mode = 1
+
 [node name="LevelLabel" type="Label" parent="TileMap"]
 margin_left = 838.499
 margin_top = 26.3798
@@ -831,18 +890,18 @@ bus = "Effects"
 stream = ExtResource( 14 )
 autoplay = true
 bus = "Music"
-[connection signal="allFullLineDone" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_allFullLineDone"]
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
-[connection signal="flip" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_flip"]
+[connection signal="allFullLineDone" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_allFullLineDone"]
 [connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_flip"]
 [connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_newBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_newBlock"]
 [connection signal="placedBlock" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_placedBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]
