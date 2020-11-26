@@ -411,13 +411,14 @@ format = 1
 script = ExtResource( 9 )
 
 [node name="ScoreLabel" type="Label" parent="TileMap/NumberMap"]
-margin_left = 838.499
-margin_top = 5.37984
-margin_right = 1129.5
-margin_bottom = 69.3798
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = 672.0
+margin_top = 192.0
+margin_right = 963.0
+margin_bottom = 323.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 10 )
-text = "Score: 0"
+text = "Score:
+0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -686,7 +687,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TouchControllers" type="Control" parent="TileMap"]
+[node name="HorizontalTouchControllers" type="Control" parent="TileMap"]
 modulate = Color( 1, 1, 1, 0.831373 )
 margin_right = 1024.0
 margin_bottom = 764.0
@@ -694,54 +695,105 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RightButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+[node name="RightButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
 position = Vector2( 897, 476 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 26 )
 action = "right"
 visibility_mode = 1
 
-[node name="LeftButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+[node name="LeftButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
 position = Vector2( 795, 476 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 25 )
 action = "left"
 visibility_mode = 1
 
-[node name="SaveButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
-position = Vector2( 795, 580 )
+[node name="SaveButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
+position = Vector2( 139, 476 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 31 )
 action = "save"
 visibility_mode = 1
 
-[node name="FlipButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+[node name="FlipButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
 position = Vector2( 35, 476 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 30 )
 action = "flip"
 visibility_mode = 1
 
-[node name="SoftFallButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
-position = Vector2( 139, 476 )
+[node name="SoftFallButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
+position = Vector2( 795, 581 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 28 )
 action = "down"
 visibility_mode = 1
 
-[node name="HardFallButton" type="TouchScreenButton" parent="TileMap/TouchControllers"]
+[node name="HardFallButton" type="TouchScreenButton" parent="TileMap/HorizontalTouchControllers"]
 position = Vector2( 139, 581 )
 scale = Vector2( 0.257165, 0.257165 )
 normal = ExtResource( 27 )
 action = "instadown"
 visibility_mode = 1
 
+[node name="VerticalTouchControllers" type="Control" parent="TileMap"]
+visible = false
+modulate = Color( 1, 1, 1, 0.831373 )
+margin_right = 1024.0
+margin_bottom = 764.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 672, 565 )
+scale = Vector2( 0.302362, 0.302362 )
+normal = ExtResource( 26 )
+action = "right"
+visibility_mode = 1
+
+[node name="LeftButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 181, 565 )
+scale = Vector2( 0.302362, 0.302362 )
+normal = ExtResource( 25 )
+action = "left"
+visibility_mode = 1
+
+[node name="SaveButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 181, 351 )
+scale = Vector2( 0.302362, 0.302362 )
+normal = ExtResource( 31 )
+action = "save"
+visibility_mode = 1
+
+[node name="FlipButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 672, 351 )
+scale = Vector2( 0.302362, 0.302362 )
+normal = ExtResource( 30 )
+action = "flip"
+visibility_mode = 1
+
+[node name="SoftFallButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 181, 458 )
+scale = Vector2( 0.302363, 0.302363 )
+normal = ExtResource( 28 )
+action = "down"
+visibility_mode = 1
+
+[node name="HardFallButton" type="TouchScreenButton" parent="TileMap/VerticalTouchControllers"]
+position = Vector2( 671.952, 458 )
+scale = Vector2( 0.302, 0.302 )
+normal = ExtResource( 27 )
+action = "instadown"
+visibility_mode = 1
+
 [node name="LevelLabel" type="Label" parent="TileMap"]
-margin_left = 838.499
-margin_top = 26.3798
-margin_right = 1129.5
-margin_bottom = 90.3798
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = 132.0
+margin_top = 192.0
+margin_right = 452.0
+margin_bottom = 256.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 10 )
 text = "Level: 1"
 __meta__ = {
@@ -800,7 +852,8 @@ margin_right = 2118.46
 margin_bottom = 350.0
 rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = ExtResource( 10 )
-text = "aca o por algun lado ponele que te muestra el score"
+text = "score: 0"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -890,18 +943,18 @@ bus = "Effects"
 stream = ExtResource( 14 )
 autoplay = true
 bus = "Music"
-[connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
 [connection signal="allFullLineDone" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_allFullLineDone"]
-[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
-[connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
+[connection signal="allFullLineDone" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_allFullLineDone"]
 [connection signal="flip" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_flip"]
-[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
+[connection signal="flip" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_flip"]
+[connection signal="flip" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_flip"]
 [connection signal="graph" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_graph"]
-[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
+[connection signal="graph" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_graph"]
 [connection signal="loadBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_loadBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
-[connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="loadBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_loadBlock"]
 [connection signal="newBlock" from="TileMap" to="TileMap/FlipSounds" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/AnimationMap" method="_on_TileMap_newBlock"]
+[connection signal="newBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_newBlock"]
 [connection signal="placedBlock" from="TileMap" to="TileMap/BlockSounds" method="_on_TileMap_placedBlock"]
 [connection signal="saveBlock" from="TileMap" to="TileMap/NumberMap" method="_on_TileMap_saveBlock"]
 [connection signal="timeout" from="TileMap/AnimationMap/Timer" to="TileMap/AnimationMap" method="_on_Timer_timeout"]

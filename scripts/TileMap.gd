@@ -28,24 +28,49 @@ signal placedBlock
 signal loadBlock(instance)
 
 func _ready():
-	score_followers.append(funcref(self, "base_mult"))
-	
+	randomize()
+	level_set(global.level)
+	if global.normal: score_followers.append(funcref(self, "base_mult"))
 	for blockt in blocks:
 		block_bag.append(blockt.new())
 	block_bag.shuffle()
 	instance = randomBlock()
 	emit_signal("newBlock", instance, block_bag[0])
 
+func _input(ev: InputEvent):
+	if Input.is_action_just_pressed("fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+	if ev is InputEventScreenTouch:
+		return
+		get_tree().set_input_as_handled()
+		controls.input(ev)
+
+func check_orientation():
+	match OS.screen_orientation:
+		OS.SCREEN_ORIENTATION_LANDSCAPE, OS.SCREEN_ORIENTATION_REVERSE_LANDSCAPE, OS.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
+			$HorizontalTouchControllers.visible = true
+			$VerticalTouchControllers.visible = false
+		OS.SCREEN_ORIENTATION_PORTRAIT, OS.SCREEN_ORIENTATION_REVERSE_PORTRAIT, OS.SCREEN_ORIENTATION_SENSOR_PORTRAIT:
+			$HorizontalTouchControllers.visible = false
+			$VerticalTouchControllers.visible = true
+
+func draw_score():
+	$NumberMap/ScoreLabel.set_text("Score:\n%d" % self.score)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta
 	controls.process(delta)
+	check_orientation()
 	var try
 	if Input.is_action_just_pressed("instadown"):
 		instance.graph(self, -1)
 		var originalY = instance.y
 		instance.set_lowest_collission(self)
-		emit_signal("graph", 0, instance.y - originalY)
+		var distance = instance.y - originalY
+		score += distance * 2
+		draw_score()
+		emit_signal("graph", 0, distance)
 		instance.graph(self, 0)
 		try = true
 	elif Input.is_action_just_pressed("save") and !saved:
@@ -99,7 +124,6 @@ func _process(delta):
 		try = instance.tryGraph(self, 0)
 		instance.y -= 1
 		instance.graph(self, 0)
-	
 	if(try):
 		var base_score: float = 0
 		var n_lines: int = 0
@@ -129,7 +153,6 @@ func _process(delta):
 					self.set_cell(j, k + 1, self.get_cell(j, k))
 					self.set_cell(j, k, -1)
 		if success:
-			combo += 1
 			calc_score(base_score, n_lines)
 			emit_signal("allFullLineDone", n_lines)
 		#Termina de checkear si las líneas estaban completas y si estaban, las borra y corrige acorde.
@@ -139,13 +162,14 @@ func _process(delta):
 				global.lastScore = score
 				upload_score()
 				$GameOver/FailSound.play()
+				$GameOver/scoreplaceholder.text = "Score: %d" % self.score
 				$GameOver.visible = true
 				get_tree().paused = true
 		
 		if combo > -1:
 			score += combo * 50
 			combo = -1
-			$NumberMap/ScoreLabel.set_text("Score: %d" % self.score)
+			draw_score()
 		
 		emit_signal("placedBlock")
 		instance = randomBlock()
@@ -155,6 +179,8 @@ func _process(delta):
 	instance.graph(self, -1)
 	instance.y += 1
 	instance.graph(self, 0)
+	score += 1
+	draw_score()
 	emit_signal("graph", 0, 1)
 	
 func get_speed() -> float:
@@ -222,8 +248,11 @@ func calc_base_score(fakeY: int, realY: int) -> float:
 	return result
 
 func calc_score(base_score: float, n_lines: int) -> void:
-	self.score += int(base_score * n_lines)
-	$NumberMap/ScoreLabel.set_text("Score: %d" % self.score)
+	if global.normal:
+		self.score += int(base_score * n_lines)
+	else:
+		self.score += int(base_score)
+	draw_score()
 
 func get_block_type() -> Object:
 	for type in blocks:
